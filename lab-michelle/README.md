@@ -1,12 +1,7 @@
-Feature Tasks
+#Lab 3
 
-for this assignment you will need to read three files and console.log the first 8 bytes (in hex) of each file
-regardless of file size, all three files should be read and logged in the order 'one.txt', 'two.txt', 'three.txt'
-Testing
+## Description
+This lab assignment asked us to create three files containing some text and asked us to console.log the first 8 bytes of each text file in hex. Then we created tests to guarantee that files were logged in proper order and that improper file paths would not work.
 
-create a test that guarantees that the files are logged in the proper order
-create a test that checks for improper file paths
-Documentation
-
-create a simple description of your project
-create a simple layer of documentation that describes how to use done in jest callbacks
+## Documentation
+Done is a callback function that signals that your test has completed.
