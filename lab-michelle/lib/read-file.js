@@ -3,28 +3,26 @@
 const fs = require('fs');
 //Requiring in the file system
 
-console.log(`current directory: ${__dirname}`);
+// console.log(`current directory: ${__dirname}`);
 
-let x = module.exports = {};
+module.exports = (path, callback) => {
+  let results = {}
 
-x.read = (callback) => {
-
-  let first, second, third;
-
-  fs.readFile(`${__dirname}/../assets/one.txt`,(err, data) => {
-    if (err) console.log(err);
-    first = data.toString('hex', 0, 8);
+  fs.readdir(path, (err, txts) => {
+    if (err) callback(err);
+    readTxts(txts);
   });
 
-  fs.readFile(`${__dirname}/../assets/two.txt`, (err, data) => {
-    if (err) console.log(err);
-    second = data.toString('hex', 0, 8);
-  });
+  function readTxts(txts) {
+    if (txts.length <= 0) {
+      callback (null, results);
+      return results;
+    }
 
-  fs.readFile(`${__dirname}/../assets/three.txt`, (err, data) => {
-    if (err) console.log(err);
-    third = data.toString('hex', 0, 8);
-  });
-
-  callback({first, second, third});
+    fs.readFile(`${path}/${txts.pop()}`, (err, data) => {
+      if (err) callback(err);
+      results[txts.length] = data.toString('hex', 0, 16);
+      readTxts(txts);
+    });
+  }
 };
